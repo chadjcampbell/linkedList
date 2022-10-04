@@ -72,7 +72,52 @@ class LinkedList {
   }
 
   contains(value) {
-    //TODO
+    let temp = this.head;
+    while (temp.next !== null) {
+      if (temp.value === value) return true;
+      temp = temp.next;
+    }
+    return false;
+  }
+
+  find(value) {
+    let temp = this.head;
+    let count = 0;
+    while (temp !== null) {
+      if (temp.value === value) return count;
+      temp = temp.next;
+      count++;
+    }
+    return null;
+  }
+
+  toString() {
+    let temp = this.head;
+    let listString = "";
+    while (temp !== null) {
+      listString += temp.value + " -> ";
+      temp = temp.next;
+    }
+    listString += "null";
+    return listString;
+  }
+
+  insertAt(value, index) {
+    if (index >= this.size()) return "Outside of list index";
+    let newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      return;
+    }
+    let previous = this.at(index - 1);
+    newNode.next = previous.next;
+    previous.next = newNode;
+  }
+
+  removeAt(index) {
+    if (index >= this.size()) return "Outside of list index";
+    let previous = this.at(index - 1);
+    previous.next = previous.next.next;
   }
 }
 
